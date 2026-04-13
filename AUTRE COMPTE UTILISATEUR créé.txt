@@ -1,0 +1,12 @@
+
+LOGIN :       employe_dren_boeny
+
+PASSWORD :    12345
+
+-----------------------------------------------------------
+
+LOGIN :       employe_cisco_majunga1
+
+PASSWORD :    12345
+
+

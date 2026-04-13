@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Portfolios{% endblock %}
+
+{% block content %}
+<h2>Gestion Personnes & Portfolios</h2>
+<div class="container-custom">
+    {% if request.user.is_superuser or request.user.profile.can_add or request.user.profile.can_edit %}
+    <div class="form-section">
+        <form method="POST" action="{% if edit_obj %}{% url 'manage_portfolio' edit_obj.id %}{% else %}{% url 'manage_portfolio' %}{% endif %}">
+            {% csrf_token %}
+            <div class="form-group"><label class="form-label fw-bold">CIN :</label><input type="text" class="form-control" name="cin" value="{% if edit_obj %}{{ edit_obj.cin }}{% endif %}" required></div>
+            <div class="form-group"><label class="form-label fw-bold">Nom & Prénom :</label><input type="text" class="form-control" name="nom_prenom" value="{% if edit_obj %}{{ edit_obj.nom_prenom }}{% endif %}" required></div>
+            <div class="form-group"><label class="form-label fw-bold">Lien Portfolio :</label><input type="url" class="form-control" name="lien" value="{% if edit_obj %}{{ edit_obj.lien }}{% endif %}" required></div>
+            <button type="submit" class="btn w-100 fw-bold {% if edit_obj %}btn-warning{% else %}btn-dark{% endif %} mt-2">{% if edit_obj %}Mettre à jour{% else %}Enregistrer{% endif %}</button>
+        </form>
+    </div>
+    {% endif %}
+    
+    <div class="table-section">
+        <table id="dataTable" class="display nowrap" style="width:100%">
+            <thead><tr style="background:#343a40; color:white;"><th>CIN</th><th>Nom & Prénom</th><th>Lien</th><th>Actions</th></tr></thead>
+            <tbody>
+                {% for p in portfolios %}<tr><td>{{ p.cin }}</td><td>{{ p.nom_prenom }}</td><td><a href="{{ p.lien }}" target="_blank">Ouvrir</a></td><td>
+                {% if request.user.is_superuser or request.user.profile.can_edit %}<a href="{% url 'manage_portfolio' p.id %}" class="btn btn-sm btn-warning">Modif</a>{% endif %}
+                {% if request.user.is_superuser or request.user.profile.can_delete %}<form method="POST" action="{% url 'delete_portfolio' p.id %}" style="display:inline;" onsubmit="return confirm('Supprimer {{ p.nom_prenom }} ?');">{% csrf_token %}<button class="btn btn-sm btn-danger">Suppr</button></form>{% endif %}
+                </td></tr>{% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() { $('#dataTable').DataTable({ "language": { "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/fr-FR.json" }, "paging": false, "scrollY": "400px", "scrollX": true, "dom": 'Bfrtip', "buttons": [ { extend: 'copy'}, { extend: 'csv', filename: function() { return formatFileName('Export_Personnes'); } }, { extend: 'excel', filename: function() { return formatFileName('Export_Personnes'); } }, { extend: 'pdf', filename: function() { return formatFileName('Export_Personnes'); } }, { extend: 'print'} ] }); });
+</script>
+{% endblock %}

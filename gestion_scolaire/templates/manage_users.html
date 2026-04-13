@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block title %}Gestion Utilisateurs{% endblock %}
+
+{% block content %}
+<h2>Administration des Accès</h2>
+<div class="container-custom">
+    <div class="form-section">
+        <form method="POST" action="{% if edit_obj %}{% url 'manage_users' edit_obj.id %}{% else %}{% url 'manage_users' %}{% endif %}">
+            {% csrf_token %}
+            <div class="form-group"><label class="form-label fw-bold">Nom d'utilisateur :</label><input type="text" class="form-control" name="username" value="{% if edit_obj %}{{ edit_obj.username }}{% endif %}" required></div>
+            <div class="form-group"><label class="form-label fw-bold">Mot de passe {% if edit_obj %}(Vide = inchangé){% endif %} :</label><input type="password" class="form-control" name="password" {% if not edit_obj %}required{% endif %}></div>
+            <hr class="my-4">
+            
+            <div class="form-group"><label class="form-label fw-bold">Rôle Administratif :</label>
+                <select class="form-select" name="role" required>
+                    <option value="DREN" {% if edit_obj.profile.role == 'DREN' %}selected{% endif %}>Responsable DREN</option>
+                    <option value="CISCO" {% if edit_obj.profile.role == 'CISCO' %}selected{% endif %}>Responsable CISCO</option>
+                    <option value="ZAP" {% if edit_obj.profile.role == 'ZAP' %}selected{% endif %}>Responsable ZAP</option>
+                    <option value="FOKONTANY" {% if edit_obj.profile.role == 'FOKONTANY' %}selected{% endif %}>Responsable Fokontany</option>
+                    <option value="ETAB" {% if edit_obj.profile.role == 'ETAB' %}selected{% endif %}>Directeur Établissement</option>
+                    <option value="INVITE" {% if not edit_obj or edit_obj.profile.role == 'INVITE' %}selected{% endif %}>Invité (Lecture seule)</option>
+                </select>
+            </div>
+
+            <div class="form-group mt-3 p-3 bg-white border border-primary rounded shadow-sm">
+                <label class="form-label fw-bold text-primary">🌍 Limitation Géographique :</label>
+                
+                <label class="mt-2 fw-bold small">DREN :</label>
+                <input type="text" id="dren-input" class="form-control form-control-sm autocomplete" data-type="dren" value="{% if edit_obj and edit_obj.profile.dren_assignee %}{{ edit_obj.profile.dren_assignee.nom }}{% endif %}" autocomplete="off">
+                <input type="hidden" id="dren-id" name="dren_assignee" value="{% if edit_obj and edit_obj.profile.dren_assignee %}{{ edit_obj.profile.dren_assignee.id }}{% endif %}"><div id="dren-suggestions" class="suggestions-box"></div>
+
+                <label class="mt-2 fw-bold small">CISCO :</label>
+                <input type="text" id="cisco-input" class="form-control form-control-sm autocomplete" data-type="cisco" data-parent="dren" value="{% if edit_obj and edit_obj.profile.cisco_assignee %}{{ edit_obj.profile.cisco_assignee.nom }}{% endif %}" autocomplete="off" {% if not edit_obj or not edit_obj.profile.dren_assignee %}disabled{% endif %}>
+                <input type="hidden" id="cisco-id" name="cisco_assignee" value="{% if edit_obj and edit_obj.profile.cisco_assignee %}{{ edit_obj.profile.cisco_assignee.id }}{% endif %}"><div id="cisco-suggestions" class="suggestions-box"></div>
+                
+                <label class="mt-2 fw-bold small">ZAP :</label>
+                <input type="text" id="zap-input" class="form-control form-control-sm autocomplete" data-type="zap" data-parent="cisco" value="{% if edit_obj and edit_obj.profile.zap_assignee %}{{ edit_obj.profile.zap_assignee.nom }}{% endif %}" autocomplete="off" {% if not edit_obj or not edit_obj.profile.cisco_assignee %}disabled{% endif %}>
+                <input type="hidden" id="zap-id" name="zap_assignee" value="{% if edit_obj and edit_obj.profile.zap_assignee %}{{ edit_obj.profile.zap_assignee.id }}{% endif %}"><div id="zap-suggestions" class="suggestions-box"></div>
+                
+                <label class="mt-2 fw-bold small">Fokontany :</label>
+                <input type="text" id="fokontany-input" class="form-control form-control-sm autocomplete" data-type="fokontany" data-parent="zap" value="{% if edit_obj and edit_obj.profile.fokontany_assignee %}{{ edit_obj.profile.fokontany_assignee.nom }}{% endif %}" autocomplete="off" {% if not edit_obj or not edit_obj.profile.zap_assignee %}disabled{% endif %}>
+                <input type="hidden" id="fokontany-id" name="fokontany_assignee" value="{% if edit_obj and edit_obj.profile.fokontany_assignee %}{{ edit_obj.profile.fokontany_assignee.id }}{% endif %}"><div id="fokontany-suggestions" class="suggestions-box"></div>
+                
+                <label class="mt-2 fw-bold small">Établissement :</label>
+                <input type="text" id="etablissement-input" class="form-control form-control-sm autocomplete" data-type="etablissement" data-parent="fokontany" value="{% if edit_obj and edit_obj.profile.etablissement_assignee %}{{ edit_obj.profile.etablissement_assignee.nom }}{% endif %}" autocomplete="off" {% if not edit_obj or not edit_obj.profile.fokontany_assignee %}disabled{% endif %}>
+                <input type="hidden" id="etablissement-id" name="etablissement_assignee" value="{% if edit_obj and edit_obj.profile.etablissement_assignee %}{{ edit_obj.profile.etablissement_assignee.id }}{% endif %}"><div id="etablissement-suggestions" class="suggestions-box"></div>
+
+                <small class="text-muted d-block mt-2" style="font-size:0.8rem;">Laissez vide pour Accès National. Renseignez la zone la plus précise pour y restreindre l'employé.</small>
+            </div>
+
+            <div class="form-group mb-3"><label class="form-label fw-bold">Droits d'Actions :</label>
+                <div class="form-check"><input class="form-check-input" type="checkbox" name="can_add" id="can_add" {% if edit_obj.profile.can_add %}checked{% endif %}><label class="form-check-label" for="can_add">Droit d'Ajout</label></div>
+                <div class="form-check"><input class="form-check-input" type="checkbox" name="can_edit" id="can_edit" {% if edit_obj.profile.can_edit %}checked{% endif %}><label class="form-check-label" for="can_edit">Droit de Modif</label></div>
+                <div class="form-check"><input class="form-check-input" type="checkbox" name="can_delete" id="can_delete" {% if edit_obj.profile.can_delete %}checked{% endif %}><label class="form-check-label" for="can_delete">Droit de Suppr</label></div>
+            </div>
+            
+            <div class="alert alert-warning p-2"><div class="form-check"><input class="form-check-input" type="checkbox" name="is_superuser" id="is_superuser" {% if edit_obj and edit_obj.is_superuser %}checked{% endif %}><label class="form-check-label fw-bold text-dark" for="is_superuser">Super-Administrateur</label></div></div>
+            <button type="submit" class="btn w-100 fw-bold {% if edit_obj %}btn-warning{% else %}btn-dark{% endif %}">{% if edit_obj %}Mettre à jour{% else %}Créer l'utilisateur{% endif %}</button>
+        </form>
+    </div>
+    
+    <div class="table-section">
+        <table id="dataTable" class="display nowrap" style="width:100%">
+            <thead><tr style="background:#000; color:white;"><th>Login</th><th>Juridiction</th><th>Rôle & Droits</th><th>Actions</th></tr></thead>
+            <tbody>
+                {% for u in utilisateurs %}<tr>
+                    <td class="fw-bold">{{ u.username }}</td>
+                    <td style="font-size:0.9rem;">
+                        {% if u.is_superuser %}<span class="text-danger fw-bold">NATIONALE</span>
+                        {% elif u.profile.etablissement_assignee %}<span class="text-primary fw-bold">Étab: {{ u.profile.etablissement_assignee.nom }}</span>
+                        {% elif u.profile.fokontany_assignee %}<span class="text-primary fw-bold">Fok: {{ u.profile.fokontany_assignee.nom }}</span>
+                        {% elif u.profile.zap_assignee %}<span class="text-primary fw-bold">ZAP: {{ u.profile.zap_assignee.nom }}</span>
+                        {% elif u.profile.cisco_assignee %}<span class="text-primary fw-bold">CISCO: {{ u.profile.cisco_assignee.nom }}</span>
+                        {% elif u.profile.dren_assignee %}<span class="text-primary fw-bold">DREN: {{ u.profile.dren_assignee.nom }}</span>
+                        {% else %}<span class="text-success fw-bold">NATIONALE</span>{% endif %}
+                    </td>
+                    <td style="font-size:0.9rem;">{% if u.is_superuser %}Tous{% else %}{{ u.profile.get_role_display }}<br>({% if u.profile.can_add %}A{% else %}-{% endif %}/{% if u.profile.can_edit %}M{% else %}-{% endif %}/{% if u.profile.can_delete %}S{% else %}-{% endif %}){% endif %}</td>
+                    <td><a href="{% url 'manage_users' u.id %}" class="btn btn-sm btn-warning">Modif</a><form method="POST" action="{% url 'delete_user' u.id %}" style="display:inline;" onsubmit="return confirm('Supprimer {{ u.username }} ?');">{% csrf_token %}<button class="btn btn-sm btn-danger">Suppr</button></form></td>
+                </tr>{% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() { $('#dataTable').DataTable({ "language": { "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/fr-FR.json" }, "paging": false, "scrollY": "400px"}); });
+    const chaineCascade = ['dren', 'cisco', 'zap', 'fokontany', 'etablissement']; 
+    document.querySelectorAll('.autocomplete').forEach(input => { 
+        input.addEventListener('input', function() { 
+            let type = this.dataset.type, parentType = this.dataset.parent, term = this.value, suggBox = document.getElementById(type + '-suggestions'), parentId = parentType ? document.getElementById(parentType + '-id').value : ''; 
+            if ((parentType && !parentId) || term.length < 2) { suggBox.innerHTML = ''; return; } 
+            fetch(`/api/autocomplete/?type=${type}&term=${term}&parent_id=${parentId}`).then(r => r.json()).then(data => { 
+                suggBox.innerHTML = ''; 
+                data.forEach(item => { 
+                    let div = document.createElement('div'); div.className = 'suggestion-item'; div.innerText = item.nom; 
+                    div.onclick = function() { 
+                        input.value = item.nom; document.getElementById(type + '-id').value = item.id; suggBox.innerHTML = ''; 
+                        let idx = chaineCascade.indexOf(type); 
+                        for(let i = idx + 1; i < chaineCascade.length; i++) { 
+                            let childInp = document.getElementById(chaineCascade[i] + '-input'); 
+                            if(childInp) { childInp.value = ''; document.getElementById(chaineCascade[i] + '-id').value = ''; childInp.disabled = true; }
+                        } 
+                        if (idx + 1 < chaineCascade.length && document.getElementById(chaineCascade[idx + 1] + '-input')) document.getElementById(chaineCascade[idx + 1] + '-input').disabled = false;
+                    }; suggBox.appendChild(div); 
+                });});});}); 
+    document.addEventListener('click', e => { if (!e.target.classList.contains('autocomplete')) document.querySelectorAll('.suggestions-box').forEach(b => b.innerHTML = ''); });
+</script>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Affectations{% endblock %}
+
+{% block content %}
+<h2>Affectations (Présences)</h2>
+<div class="container-custom">
+    {% if request.user.is_superuser or request.user.profile.can_add or request.user.profile.can_edit %}
+    <div class="form-section">
+        <form method="POST" action="{% if edit_obj %}{% url 'manage_presence' edit_obj.id %}{% else %}{% url 'manage_presence' %}{% endif %}">
+            {% csrf_token %}
+            <div class="form-group"><label class="form-label fw-bold">Personne :</label><select class="form-select" name="personne_id" required><option value="">-- Choix --</option>{% for p in personnes %}<option value="{{ p.id }}" {% if edit_obj and edit_obj.personne.id == p.id %}selected{% endif %}>{{ p.nom_prenom }}</option>{% endfor %}</select></div>
+            <div class="form-group"><label class="form-label fw-bold">Établissement (Recherche) :</label><input type="text" id="etab-global-input" class="form-control" value="{% if edit_obj %}{{ edit_obj.etablissement.nom }}{% endif %}" autocomplete="off" required><input type="hidden" id="etablissement-id" name="etablissement_id" value="{% if edit_obj %}{{ edit_obj.etablissement.id }}{% endif %}"><div id="etab-suggestions" class="suggestions-box"></div></div>
+            <div class="form-group"><label class="form-label fw-bold">Début :</label><input type="date" class="form-control" name="date_debut" value="{% if edit_obj %}{{ edit_obj.date_debut|date:'Y-m-d' }}{% else %}{% now 'Y-m-d' %}{% endif %}" required></div>
+            <div class="form-group"><label class="form-label fw-bold">Fin (vide si en cours) :</label><input type="date" class="form-control" name="date_fin" value="{% if edit_obj and edit_obj.date_fin %}{{ edit_obj.date_fin|date:'Y-m-d' }}{% endif %}"></div>
+            <button type="submit" class="btn w-100 fw-bold {% if edit_obj %}btn-warning{% else %}btn-primary{% endif %} mt-2" style="{% if not edit_obj %}background:#e83e8c; border-color:#e83e8c;{% endif %}">{% if edit_obj %}Mettre à jour{% else %}Affecter{% endif %}</button>
+        </form>
+    </div>
+    {% endif %}
+    
+    <div class="table-section">
+        <table id="dataTable" class="display nowrap" style="width:100%">
+            <thead><tr style="background:#e83e8c; color:white;"><th>Personne</th><th>Établissement</th><th>Début</th><th>Fin</th><th>Actions</th></tr></thead>
+            <tbody>
+                {% for pres in presences %}<tr><td>{{ pres.personne.nom_prenom }}</td><td>{{ pres.etablissement.nom }}</td><td>{{ pres.date_debut|date:"d/m/Y" }}</td><td>{% if pres.date_fin %}{{ pres.date_fin|date:"d/m/Y" }}{% else %}En cours{% endif %}</td><td>
+                {% if request.user.is_superuser or request.user.profile.can_edit %}<a href="{% url 'manage_presence' pres.id %}" class="btn btn-sm btn-warning">Modif</a>{% endif %}
+                {% if request.user.is_superuser or request.user.profile.can_delete %}<form method="POST" action="{% url 'delete_presence' pres.id %}" style="display:inline;" onsubmit="return confirm('Supprimer cette affectation ?');">{% csrf_token %}<button class="btn btn-sm btn-danger">Suppr</button></form>{% endif %}
+                </td></tr>{% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() { $('#dataTable').DataTable({ "language": { "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/fr-FR.json" }, "paging": false, "scrollY": "400px", "scrollX": true, "dom": 'Bfrtip', "buttons": [ { extend: 'copy'}, { extend: 'csv', filename: function() { return formatFileName('Export_Affectations'); } }, { extend: 'excel', filename: function() { return formatFileName('Export_Affectations'); } }, { extend: 'pdf', filename: function() { return formatFileName('Export_Affectations'); } }, { extend: 'print'} ] }); });
+    const searchInput = document.getElementById('etab-global-input'), hiddenInput = document.getElementById('etablissement-id'), suggestionBox = document.getElementById('etab-suggestions'); searchInput.addEventListener('input', function() { let term = this.value; if (term.length < 2) { suggestionBox.innerHTML = ''; hiddenInput.value = ''; return; } fetch(`/api/autocomplete/?type=etablissement_global&term=${term}`).then(r => r.json()).then(data => { suggestionBox.innerHTML = ''; data.forEach(item => { let div = document.createElement('div'); div.className = 'suggestion-item'; div.innerText = item.nom; div.onclick = function() { searchInput.value = item.nom.split(' (')[0]; hiddenInput.value = item.id; suggestionBox.innerHTML = ''; }; suggestionBox.appendChild(div); });});}); document.addEventListener('click', e => { if (e.target !== searchInput) suggestionBox.innerHTML = ''; });
+</script>
+{% endblock %}

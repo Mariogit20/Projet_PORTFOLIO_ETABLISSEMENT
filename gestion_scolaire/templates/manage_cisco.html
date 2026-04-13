@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}CISCO{% endblock %}
+
+{% block content %}
+<h2>Gestion CISCO</h2>
+<div class="container-custom">
+    {% if request.user.is_superuser or request.user.profile.can_add or request.user.profile.can_edit %}
+    <div class="form-section">
+        <form method="POST" action="{% if edit_obj %}{% url 'manage_cisco' edit_obj.id %}{% else %}{% url 'manage_cisco' %}{% endif %}">
+            {% csrf_token %}
+            <div class="form-group"><label class="form-label fw-bold">DREN :</label><input type="text" id="dren-input" class="form-control autocomplete" data-type="dren" value="{% if edit_obj %}{{ edit_obj.dren.nom }}{% endif %}" autocomplete="off" required><input type="hidden" id="dren-id" name="dren_id" value="{% if edit_obj %}{{ edit_obj.dren.id }}{% endif %}"><div id="dren-suggestions" class="suggestions-box"></div></div>
+            <div class="form-group"><label class="form-label fw-bold">Nom CISCO :</label><input type="text" class="form-control" name="nom_cisco" value="{% if edit_obj %}{{ edit_obj.nom }}{% endif %}" required></div>
+            <button type="submit" class="btn w-100 fw-bold {% if edit_obj %}btn-warning{% else %}btn-primary{% endif %} mt-2">{% if edit_obj %}Mettre à jour{% else %}Enregistrer{% endif %}</button>
+        </form>
+    </div>
+    {% endif %}
+    
+    <div class="table-section">
+        <table id="dataTable" class="display nowrap" style="width:100%">
+            <thead><tr style="background:#007bff; color:white;"><th>ID</th><th>CISCO</th><th>DREN</th><th>Actions</th></tr></thead>
+            <tbody>
+                {% for c in ciscos %}<tr><td>{{ c.id }}</td><td>{{ c.nom }}</td><td>{{ c.dren.nom }}</td><td>
+                {% if request.user.is_superuser or request.user.profile.can_edit %}<a href="{% url 'manage_cisco' c.id %}" class="btn btn-sm btn-warning">Modif</a>{% endif %}
+                {% if request.user.is_superuser or request.user.profile.can_delete %}<form method="POST" action="{% url 'delete_cisco' c.id %}" style="display:inline;" onsubmit="return confirm('Supprimer {{ c.nom }} ?');">{% csrf_token %}<button class="btn btn-sm btn-danger">Suppr</button></form>{% endif %}
+                </td></tr>{% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() { $('#dataTable').DataTable({ "language": { "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/fr-FR.json" }, "paging": false, "scrollY": "400px", "scrollX": true, "dom": 'Bfrtip', "buttons": [ { extend: 'copy'}, { extend: 'csv', filename: function() { return formatFileName('Export_CISCO'); } }, { extend: 'excel', filename: function() { return formatFileName('Export_CISCO'); } }, { extend: 'pdf', filename: function() { return formatFileName('Export_CISCO'); } }, { extend: 'print'} ] }); });
+    document.querySelectorAll('.autocomplete').forEach(input => { input.addEventListener('input', function() { let type = this.dataset.type, term = this.value, suggBox = document.getElementById(type + '-suggestions'); if (term.length < 2) { suggBox.innerHTML = ''; return; } fetch(`/api/autocomplete/?type=${type}&term=${term}`).then(r => r.json()).then(data => { suggBox.innerHTML = ''; data.forEach(item => { let div = document.createElement('div'); div.className = 'suggestion-item'; div.innerText = item.nom; div.onclick = function() { input.value = item.nom; document.getElementById(type + '-id').value = item.id; suggBox.innerHTML = ''; }; suggBox.appendChild(div); });});});}); document.addEventListener('click', e => { if (!e.target.classList.contains('autocomplete')) document.querySelectorAll('.suggestions-box').forEach(b => b.innerHTML = ''); });
+</script>
+{% endblock %}

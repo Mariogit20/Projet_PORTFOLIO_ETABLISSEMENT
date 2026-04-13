@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}Accueil - GestScolaire{% endblock %}
+
+{% block extra_css %}
+.dashboard-container { background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+.search-input { width: 100%; padding: 15px 20px; font-size: 18px; border: 2px solid #007bff; border-radius: 30px; outline: none; }
+.menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 15px; margin-bottom: 30px;}
+.menu-card { color: #fff; padding: 20px; text-align: center; border-radius: 8px; text-decoration: none; font-weight: bold; transition: 0.2s; }
+.menu-card:hover { transform: translateY(-5px); color: white; text-decoration: none; filter: brightness(1.1);}
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h1 class="text-center text-dark mb-4 fw-bold">Système de Gestion Scolaire</h1>
+    
+    <div class="search-container position-relative mb-4">
+        <input type="text" id="global-search" class="search-input" placeholder="Rechercher un établissement..." autocomplete="off">
+        <div id="search-suggestions" class="suggestions-box"></div>
+    </div>
+    
+    <h4 class="text-secondary mt-4 mb-3">Géographie Scolaire</h4>
+    <div class="menu-grid">
+        <a href="{% url 'manage_dren' %}" class="menu-card" style="background: #28a745;">DREN</a>
+        <a href="{% url 'manage_cisco' %}" class="menu-card" style="background: #007bff;">CISCO</a>
+        <a href="{% url 'manage_zap' %}" class="menu-card" style="background: #17a2b8;">ZAP</a>
+        <a href="{% url 'manage_fokontany' %}" class="menu-card" style="background: #fd7e14;">Fokontany</a>
+        <a href="{% url 'manage_etablissement' %}" class="menu-card" style="background: #6f42c1;">Établissements</a>
+    </div>
+
+    <h4 class="text-secondary mt-4 mb-3">Ressources Humaines</h4>
+    <div class="menu-grid" style="grid-template-columns: 1fr 1fr;">
+        <a href="{% url 'manage_portfolio' %}" class="menu-card" style="background: #343a40;">Portfolios (Personnes)</a>
+        <a href="{% url 'manage_presence' %}" class="menu-card" style="background: #e83e8c;">Affectations (Présences)</a>
+    </div>
+
+    {% if request.user.is_superuser %}
+    <h4 class="text-secondary mt-5 mb-3 border-top pt-4">Sauvegarde & Restauration SQLite</h4>
+    <div class="d-flex gap-3 align-items-start flex-wrap">
+        <a href="{% url 'export_data' %}" class="btn btn-danger fw-bold px-4 py-2 mt-1">📥 EXPORTER JSON</a>
+        
+        <form method="POST" action="{% url 'import_data' %}" enctype="multipart/form-data" class="bg-light p-3 border rounded flex-grow-1 shadow-sm">
+            {% csrf_token %}
+            <div class="d-flex gap-2 mb-2">
+                <input class="form-control form-control-sm" type="file" name="json_file" accept=".json" required>
+                <button type="submit" class="btn btn-success fw-bold btn-sm px-3">NOURRIR LA BASE</button>
+            </div>
+            <div class="form-check mt-2">
+                <input class="form-check-input" type="checkbox" name="hard_reset" id="hard_reset">
+                <label class="form-check-label text-danger fw-bold" style="font-size: 0.85rem;" for="hard_reset">
+                    ⚠️ Remplacement Total automatique (Hard Reset) de la base de données par ce fichier JSON
+                </label>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const searchInput = document.getElementById('global-search'), suggestionBox = document.getElementById('search-suggestions');
+    searchInput.addEventListener('input', function() { 
+        let term = this.value; 
+        if (term.length < 2) { suggestionBox.innerHTML = ''; return; } 
+        fetch(`/api/autocomplete/?type=etablissement_global&term=${term}`).then(r => r.json()).then(data => { 
+            suggestionBox.innerHTML = ''; 
+            if(data.length===0){ suggestionBox.innerHTML='<div class="suggestion-item text-muted">Aucun résultat</div>'; return;} 
+            data.forEach(item => { 
+                let div = document.createElement('div'); div.className = 'suggestion-item'; div.innerText = item.nom; 
+                div.onclick = function() { window.location.href = `/etablissement/${item.id}/`; }; suggestionBox.appendChild(div); 
+            }); 
+        }); 
+    });
+    document.addEventListener('click', e => { if (e.target !== searchInput) suggestionBox.innerHTML = ''; });
+</script>
+{% endblock %}

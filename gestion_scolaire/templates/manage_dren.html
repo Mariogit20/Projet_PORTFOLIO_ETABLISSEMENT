@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}DREN{% endblock %}
+
+{% block content %}
+<h2>Gestion DREN</h2>
+<div class="container-custom">
+    {% if request.user.is_superuser or request.user.profile.can_add or request.user.profile.can_edit %}
+    <div class="form-section">
+        <form method="POST" action="{% if edit_obj %}{% url 'manage_dren' edit_obj.id %}{% else %}{% url 'manage_dren' %}{% endif %}">
+            {% csrf_token %} 
+            <label class="form-label fw-bold">Nom DREN :</label> 
+            <input type="text" class="form-control mb-3" name="nom_dren" value="{% if edit_obj %}{{ edit_obj.nom }}{% endif %}" required>
+            <button type="submit" class="btn w-100 fw-bold {% if edit_obj %}btn-warning{% else %}btn-success{% endif %}">{% if edit_obj %}Mettre à jour{% else %}Enregistrer{% endif %}</button>
+        </form>
+    </div>
+    {% endif %}
+    
+    <div class="table-section">
+        <table id="dataTable" class="display nowrap" style="width:100%">
+            <thead><tr style="background:#28a745; color:white;"><th>ID</th><th>DREN</th><th>Actions</th></tr></thead>
+            <tbody>
+                {% for d in drens %}<tr><td>{{ d.id }}</td><td>{{ d.nom }}</td><td>
+                {% if request.user.is_superuser or request.user.profile.can_edit %}<a href="{% url 'manage_dren' d.id %}" class="btn btn-sm btn-warning">Modif</a>{% endif %}
+                {% if request.user.is_superuser or request.user.profile.can_delete %}<form method="POST" action="{% url 'delete_dren' d.id %}" style="display:inline;" onsubmit="return confirm('Supprimer {{ d.nom }} ?');">{% csrf_token %}<button class="btn btn-sm btn-danger">Suppr</button></form>{% endif %}
+                </td></tr>{% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() { $('#dataTable').DataTable({ "language": { "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/fr-FR.json" }, "paging": false, "scrollY": "400px", "scrollX": true, "dom": 'Bfrtip', "buttons": [ { extend: 'copy'}, { extend: 'csv', filename: function() { return formatFileName('Export_DREN'); } }, { extend: 'excel', filename: function() { return formatFileName('Export_DREN'); } }, { extend: 'pdf', filename: function() { return formatFileName('Export_DREN'); } }, { extend: 'print'} ] }); });
+</script>
+{% endblock %}

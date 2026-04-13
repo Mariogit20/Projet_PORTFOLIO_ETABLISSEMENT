@@ -1,0 +1,21 @@
+PS D:\PYTHON DJANGO HOPES\Projet_PORTFOLIO_ETABLISSEMENT> & "d:\PYTHON DJANGO HOPES\Projet_PORTFOLIO_ETABLISSEMENT\env\Scripts\Activate.ps1"
+(env) PS D:\PYTHON DJANGO HOPES\Projet_PORTFOLIO_ETABLISSEMENT> env\scripts\activate                                                        
+(env) PS D:\PYTHON DJANGO HOPES\Projet_PORTFOLIO_ETABLISSEMENT> python manage.py runserver                                                  
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+April 13, 2026 - 19:08:42
+Django version 5.2.13, using settings 'mon_projet.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+
+WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+[13/Apr/2026 19:08:49] "GET / HTTP/1.1" 200 9641
+Not Found: /favicon.ico
+[13/Apr/2026 19:08:50] "GET /favicon.ico HTTP/1.1" 404 7744
+[13/Apr/2026 19:08:53] "GET /etablissement/ HTTP/1.1" 200 18626
+Not Found: /favicon.ico
+[13/Apr/2026 19:08:53] "GET /favicon.ico HTTP/1.1" 404 7744
+(env) PS D:\PYTHON DJANGO HOPES\Projet_PORTFOLIO_ETABLISSEMENT> 
