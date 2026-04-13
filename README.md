@@ -59,7 +59,6 @@ Ouvrez votre terminal et clonez le dépôt :
 git clone [https://github.com/Mariogit20/logiciel-scolaire.git](https://github.com/Mariogit20/logiciel-scolaire.git)
 cd logiciel-scolaire
 
-
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 C'est VRAIMENT TRES TRES TRES TRES IMPORTANT :
