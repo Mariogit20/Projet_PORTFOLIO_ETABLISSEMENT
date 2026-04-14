@@ -1,0 +1,62 @@
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github25/Projet_PORTFOLIO_ETABLISSEMENT (main)
+$ git add .
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github25/Projet_PORTFOLIO_ETABLISSEMENT (main)
+$ git commit -m "sauvegarde github 8"
+[main 810098d] sauvegarde github 8
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 Projet_PORTFOLIO_ETABLISSEMENT.mkv
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github25/Projet_PORTFOLIO_ETABLISSEMENT (main)
+$ git push origin main
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 297.39 MiB | 191.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote: error: Trace: 98cd902aa9ae102f1d963ccb1fca935b13f63f2ef934d77e5ba3142ba0
+b94b8c
+remote: error: See https://gh.io/lfs for more information.
+remote: error: File Projet_PORTFOLIO_ETABLISSEMENT.mkv is 309.63 MB; this exceed
+s GitHub's file size limit of 100.00 MB
+remote: error: GH001: Large files detected. You may want to try Git Large File S
+torage - https://git-lfs.github.com.
+To github.com:Mariogit20/Projet_PORTFOLIO_ETABLISSEMENT.git
+ ! [remote rejected] main -> main (pre-receive hook declined)
+error: failed to push some refs to 'github.com:Mariogit20/Projet_PORTFOLIO_ETABL
+ISSEMENT.git'
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github25/Projet_PORTFOLIO_ETABLISSEMENT (main)
+$ git reset --soft HEAD~1
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github25/Projet_PORTFOLIO_ETABLISSEMENT (main)
+$ git lfs install
+git lfs track "*.mkv"
+Updated Git hooks.
+Git LFS initialized.
+Tracking "*.mkv"
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github25/Projet_PORTFOLIO_ETABLISSEMENT (main)
+$ git add .gitattributes Projet_PORTFOLIO_ETABLISSEMENT.mkv
+git commit -m "sauvegarde github 8 avec LFS"
+git push origin main
+[main 7a77a1f] sauvegarde github 8 avec LFS
+ 2 files changed, 4 insertions(+)
+ create mode 100644 .gitattributes
+ create mode 100644 Projet_PORTFOLIO_ETABLISSEMENT.mkv
+Uploading LFS objects: 100% (1/1), 325 MB | 330 KB/s, done.
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 517 bytes | 86.00 KiB/s, done.
+Total 4 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To github.com:Mariogit20/Projet_PORTFOLIO_ETABLISSEMENT.git
+   b546d63..7a77a1f  main -> main
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github25/Projet_PORTFOLIO_ETABLISSEMENT (main)
+$
