@@ -12,7 +12,7 @@
             <hr class="my-4">
             
             <div class="form-group"><label class="form-label fw-bold">Rôle Administratif :</label>
-                <select class="form-select" name="role" required>
+                <select class="form-select" name="role" id="roleSelect" required>
                     <option value="DREN" {% if edit_obj.profile.role == 'DREN' %}selected{% endif %}>Responsable DREN</option>
                     <option value="CISCO" {% if edit_obj.profile.role == 'CISCO' %}selected{% endif %}>Responsable CISCO</option>
                     <option value="ZAP" {% if edit_obj.profile.role == 'ZAP' %}selected{% endif %}>Responsable ZAP</option>
@@ -106,5 +106,21 @@
                     }; suggBox.appendChild(div); 
                 });});});}); 
     document.addEventListener('click', e => { if (!e.target.classList.contains('autocomplete')) document.querySelectorAll('.suggestions-box').forEach(b => b.innerHTML = ''); });
+
+    // --- VERROUILLAGE DES CASES POUR LE RÔLE INVITÉ ---
+    const roleSelect = document.getElementById('roleSelect');
+    const permBoxes = [document.getElementById('can_add'), document.getElementById('can_edit'), document.getElementById('can_delete')];
+    
+    function checkInviteLock() {
+        if (roleSelect.value === 'INVITE') {
+            permBoxes.forEach(box => { box.checked = false; box.disabled = true; });
+        } else {
+            permBoxes.forEach(box => { box.disabled = false; });
+        }
+    }
+    
+    roleSelect.addEventListener('change', checkInviteLock);
+    checkInviteLock(); // Vérification au chargement de la page
+    // --------------------------------------------------
 </script>
 {% endblock %}

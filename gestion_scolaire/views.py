@@ -17,6 +17,10 @@ def has_perm(user, action):
     if user.is_superuser: return True
     try: profile = user.profile
     except: return False
+    
+    # VERROUILLAGE ABSOLU : Si le rôle est INVITE, on bloque tout, quoi qu'il arrive !
+    if profile.role == 'INVITE': return False
+
     if action == 'add': return profile.can_add
     if action == 'edit': return profile.can_edit
     if action == 'delete': return profile.can_delete
@@ -95,6 +99,10 @@ def manage_users(request, id=None):
         username, password, role = clean_text(request.POST.get('username')), request.POST.get('password'), request.POST.get('role', 'INVITE')
         is_superuser, can_add, can_edit, can_delete = request.POST.get('is_superuser') == 'on', request.POST.get('can_add') == 'on', request.POST.get('can_edit') == 'on', request.POST.get('can_delete') == 'on'
         
+        # --- VERROU INVITE : Si c'est un invité, on désactive les cases cochées par erreur ---
+        if role == 'INVITE':
+            can_add = can_edit = can_delete = False
+
         # --- VÉRIFICATION ANTI-FAUX AMIS ---
         d_text, d_id = request.POST.get('dren_text'), request.POST.get('dren_assignee')
         c_text, c_id = request.POST.get('cisco_text'), request.POST.get('cisco_assignee')
@@ -312,7 +320,6 @@ def manage_portfolio(request, id=None):
                 else: LienPortfolio.objects.create(cin=cin, nom_prenom=nom_prenom, lien=lien)
                 messages.success(request, "Enregistrement réussi."); return redirect('manage_portfolio')
     
-    # LA FAILLE ÉTAIT ICI : Les portfolios n'étaient pas filtrés !
     portfolios = filter_queryset_by_user(LienPortfolio.objects.all(), request.user, 'portfolio').order_by('-id')
     return render(request, 'manage_portfolio.html', {'portfolios': portfolios, 'edit_obj': instance})
 
