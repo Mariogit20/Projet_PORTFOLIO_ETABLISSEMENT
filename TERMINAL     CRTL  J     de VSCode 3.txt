@@ -1,0 +1,590 @@
+PS D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT> & "d:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Scripts\Activate.ps1"
+& : Le terme «d:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Scripts\Activate.ps1» n'est pas reconnu comme nom 
+d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez l'orthographe du nom, ou si un chemin d'accès existe, 
+vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 3
++ & "d:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env ...
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (d:\PYTHON DJANG...ts\Activate.ps1:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+PS D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT> python -m venv env                                                       
+PS D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT> env\scripts\activate                                                     
+(env) PS D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT> pip list
+Package    Version
+---------- -------
+pip        24.0
+setuptools 65.5.0
+
+[notice] A new release of pip is available: 24.0 -> 26.0.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
+(env) PS D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT> pip install -r requirements.txt                                    
+Collecting asgiref==3.11.1 (from -r requirements.txt (line 1))                                     
+  Using cached asgiref-3.11.1-py3-none-any.whl.metadata (9.3 kB)
+Collecting Django==5.2.13 (from -r requirements.txt (line 2))
+  Using cached django-5.2.13-py3-none-any.whl.metadata (4.1 kB)
+Collecting Levenshtein==0.27.3 (from -r requirements.txt (line 3))
+  Using cached levenshtein-0.27.3-cp311-cp311-win_amd64.whl.metadata (3.7 kB)
+Collecting pillow==12.2.0 (from -r requirements.txt (line 4))
+  Using cached pillow-12.2.0-cp311-cp311-win_amd64.whl.metadata (9.0 kB)
+Collecting python-Levenshtein==0.27.3 (from -r requirements.txt (line 5))
+  Using cached python_levenshtein-0.27.3-py3-none-any.whl.metadata (3.9 kB)
+Collecting RapidFuzz==3.14.5 (from -r requirements.txt (line 6))
+  Using cached rapidfuzz-3.14.5-cp311-cp311-win_amd64.whl.metadata (12 kB)
+Collecting sqlparse==0.5.5 (from -r requirements.txt (line 7))
+  Using cached sqlparse-0.5.5-py3-none-any.whl.metadata (4.7 kB)
+Collecting tzdata==2026.1 (from -r requirements.txt (line 8))
+Using cached asgiref-3.11.1-py3-none-any.whl (24 kB)
+Using cached django-5.2.13-py3-none-any.whl (8.3 MB)
+Using cached levenshtein-0.27.3-cp311-cp311-win_amd64.whl (94 kB)
+Using cached pillow-12.2.0-cp311-cp311-win_amd64.whl (7.1 MB)
+Using cached python_levenshtein-0.27.3-py3-none-any.whl (9.5 kB)
+Using cached rapidfuzz-3.14.5-cp311-cp311-win_amd64.whl (1.5 MB)
+Using cached sqlparse-0.5.5-py3-none-any.whl (46 kB)
+Using cached tzdata-2026.1-py2.py3-none-any.whl (348 kB)
+Installing collected packages: tzdata, sqlparse, RapidFuzz, pillow, asgiref, Levenshtein, Django, python-Levenshtein
+Successfully installed Django-5.2.13 Levenshtein-0.27.3 RapidFuzz-3.14.5 asgiref-3.11.1 pillow-12.2.0 python-Levenshtein-0.27.3 sqlparse-0.5.5 tzdata-2026.1
+
+[notice] A new release of pip is available: 24.0 -> 26.0.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
+(env) PS D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT> pip list                       
+Package            Version
+------------------ -------
+asgiref            3.11.1
+Django             5.2.13
+Levenshtein        0.27.3
+pillow             12.2.0
+pip                24.0
+python-Levenshtein 0.27.3
+RapidFuzz          3.14.5
+setuptools         65.5.0
+sqlparse           0.5.5
+tzdata             2026.1
+
+[notice] A new release of pip is available: 24.0 -> 26.0.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
+(env) PS D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT> pip show levenshtein
+Name: Levenshtein
+Version: 0.27.3
+Summary: Python extension for computing string edit distances and similarities.
+Home-page: 
+Author: David Necas, Mikko Ohtamaa, Antti Haapala
+Author-email: Max Bachmann <pypi@maxbachmann.de>
+License: 
+Location: D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages
+Requires: rapidfuzz
+Required-by: python-Levenshtein
+(env) PS D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT> pip show django     
+Name: Django
+Version: 5.2.13
+Summary: A high-level Python web framework that encourages rapid development and clean, pragmatic design.
+Home-page: 
+Author: 
+Author-email: Django Software Foundation <foundation@djangoproject.com>
+License: 
+Location: D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages
+Requires: asgiref, sqlparse, tzdata
+Required-by: 
+(env) PS D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT> pip list
+Package            Version
+------------------ -------
+asgiref            3.11.1
+Django             5.2.13
+Levenshtein        0.27.3
+pillow             12.2.0
+pip                24.0
+python-Levenshtein 0.27.3
+RapidFuzz          3.14.5
+setuptools         65.5.0
+sqlparse           0.5.5
+tzdata             2026.1
+
+[notice] A new release of pip is available: 24.0 -> 26.0.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
+(env) PS D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT> python manage.py makemigrations                                    
+No changes detected     
+(env) PS D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT> python manage.py migrate                                           
+Operations to perform:  
+  Apply all migrations: admin, auth, contenttypes, gestion_scolaire, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying gestion_scolaire.0001_initial... OK
+  Applying gestion_scolaire.0002_alter_cisco_unique_together_and_more... OK
+  Applying gestion_scolaire.0003_userprofile... OK
+  Applying gestion_scolaire.0004_userprofile_dren_assignee... OK
+  Applying gestion_scolaire.0005_userprofile_cisco_assignee_and_more... OK
+  Applying sessions.0001_initial... OK
+(env) PS D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT> python manage.py runserver                                         
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+April 14, 2026 - 21:30:09
+Django version 5.2.13, using settings 'mon_projet.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+
+WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+[14/Apr/2026 21:30:36] "GET / HTTP/1.1" 302 0
+[14/Apr/2026 21:30:42] "GET /login/?next=/ HTTP/1.1" 200 1301
+Not Found: /favicon.ico
+[14/Apr/2026 21:30:45] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:31:22] "POST /login/ HTTP/1.1" 302 0
+[14/Apr/2026 21:31:23] "GET / HTTP/1.1" 200 9641
+Not Found: /favicon.ico
+[14/Apr/2026 21:31:24] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:31:38] "GET /dren/ HTTP/1.1" 200 6808
+Not Found: /favicon.ico
+[14/Apr/2026 21:31:40] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:31:44] "GET /cisco/ HTTP/1.1" 200 8033
+Not Found: /favicon.ico
+[14/Apr/2026 21:31:45] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:31:49] "GET /zap/ HTTP/1.1" 200 8964
+Not Found: /favicon.ico
+[14/Apr/2026 21:31:50] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:31:53] "GET /fokontany/ HTTP/1.1" 200 9421
+Not Found: /favicon.ico
+[14/Apr/2026 21:31:54] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:32:01] "GET /etablissement/ HTTP/1.1" 200 9837
+Not Found: /favicon.ico
+[14/Apr/2026 21:32:02] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:32:07] "GET /portfolio/ HTTP/1.1" 200 7223
+Not Found: /favicon.ico
+[14/Apr/2026 21:32:08] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:32:10] "GET /presence/ HTTP/1.1" 200 8579
+Not Found: /favicon.ico
+[14/Apr/2026 21:32:12] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:32:14] "GET /utilisateurs/ HTTP/1.1" 200 13577
+Not Found: /favicon.ico
+[14/Apr/2026 21:32:16] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:33:21] "GET / HTTP/1.1" 200 9641
+Not Found: /favicon.ico
+[14/Apr/2026 21:33:23] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:34:17] "POST /import-json/ HTTP/1.1" 302 0
+[14/Apr/2026 21:34:17] "GET / HTTP/1.1" 200 10002
+Not Found: /favicon.ico
+[14/Apr/2026 21:34:19] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:34:27] "GET /dren/ HTTP/1.1" 200 17454
+Not Found: /favicon.ico
+[14/Apr/2026 21:34:28] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:34:45] "GET /cisco/ HTTP/1.1" 200 15343
+Not Found: /favicon.ico
+[14/Apr/2026 21:34:46] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:34:56] "GET /zap/ HTTP/1.1" 200 13544
+Not Found: /favicon.ico
+[14/Apr/2026 21:34:58] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:35:18] "GET /fokontany/ HTTP/1.1" 200 14809
+Not Found: /favicon.ico
+[14/Apr/2026 21:35:19] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:35:48] "GET /etablissement/ HTTP/1.1" 200 18626
+Not Found: /favicon.ico
+[14/Apr/2026 21:35:49] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:36:21] "GET /portfolio/ HTTP/1.1" 200 12790
+Not Found: /favicon.ico
+[14/Apr/2026 21:36:23] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:38:42] "GET /utilisateurs/ HTTP/1.1" 200 13577
+Not Found: /favicon.ico
+[14/Apr/2026 21:38:44] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:38:48] "GET /presence/ HTTP/1.1" 200 15421
+Not Found: /favicon.ico
+[14/Apr/2026 21:38:50] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:39:16] "GET /presence/12/ HTTP/1.1" 200 15416
+Not Found: /favicon.ico
+[14/Apr/2026 21:39:17] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:39:25] "GET /cisco/ HTTP/1.1" 200 15343
+Not Found: /favicon.ico
+[14/Apr/2026 21:39:27] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:39:31] "GET /cisco/3/ HTTP/1.1" 200 15374
+Not Found: /favicon.ico
+[14/Apr/2026 21:39:32] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:39:35] "GET /cisco/6/ HTTP/1.1" 200 15371
+Not Found: /favicon.ico
+[14/Apr/2026 21:39:36] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:39:50] "GET /cisco/ HTTP/1.1" 200 15343
+Not Found: /favicon.ico
+[14/Apr/2026 21:39:52] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:39:58] "GET /api/autocomplete/?type=dren&term=bo HTTP/1.1" 200 91
+[14/Apr/2026 21:40:42] "POST /cisco/ HTTP/1.1" 302 0
+[14/Apr/2026 21:40:42] "GET /cisco/ HTTP/1.1" 200 16165
+Not Found: /favicon.ico
+[14/Apr/2026 21:40:44] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:41:08] "GET /api/autocomplete/?type=dren&term=OE HTTP/1.1" 200 28
+[14/Apr/2026 21:41:08] "GET /api/autocomplete/?type=dren&term=OEN HTTP/1.1" 200 28
+[14/Apr/2026 21:41:09] "GET /api/autocomplete/?type=dren&term=OENY HTTP/1.1" 200 28
+[14/Apr/2026 21:41:35] "POST /cisco/ HTTP/1.1" 302 0
+[14/Apr/2026 21:41:35] "GET /cisco/ HTTP/1.1" 200 16644
+Not Found: /favicon.ico
+[14/Apr/2026 21:41:37] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:42:32] "GET /cisco/17/ HTTP/1.1" 200 16329
+Not Found: /favicon.ico
+[14/Apr/2026 21:42:34] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:42:53] "GET /api/autocomplete/?type=dren&term=SOFIA HTTP/1.1" 200 28
+[14/Apr/2026 21:42:59] "POST /cisco/17/ HTTP/1.1" 302 0
+[14/Apr/2026 21:42:59] "GET /cisco/ HTTP/1.1" 200 16644
+Not Found: /favicon.ico
+[14/Apr/2026 21:43:00] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:44:06] "GET /api/autocomplete/?type=dren&term=bo HTTP/1.1" 200 91
+[14/Apr/2026 21:44:12] "POST /cisco/ HTTP/1.1" 302 0
+[14/Apr/2026 21:44:12] "GET /cisco/ HTTP/1.1" 200 17129
+Not Found: /favicon.ico
+[14/Apr/2026 21:44:13] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:44:44] "GET /cisco/18/ HTTP/1.1" 200 16817
+Not Found: /favicon.ico
+[14/Apr/2026 21:44:46] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:44:58] "GET /utilisateurs/ HTTP/1.1" 200 13577
+Not Found: /favicon.ico
+[14/Apr/2026 21:44:59] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:47:52] "GET /api/autocomplete/?type=dren&term=bo&parent_id= HTTP/1.1" 200 91
+[14/Apr/2026 21:48:10] "POST /utilisateurs/ HTTP/1.1" 302 0
+[14/Apr/2026 21:48:10] "GET /utilisateurs/ HTTP/1.1" 200 14722
+Not Found: /favicon.ico
+[14/Apr/2026 21:48:12] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:48:20] "GET /utilisateurs/2/ HTTP/1.1" 200 14388
+Not Found: /favicon.ico
+[14/Apr/2026 21:48:23] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:49:40] "POST /logout/ HTTP/1.1" 302 0
+[14/Apr/2026 21:49:40] "GET /login/ HTTP/1.1" 200 1301
+Not Found: /favicon.ico
+[14/Apr/2026 21:49:40] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:50:06] "POST /login/ HTTP/1.1" 302 0
+[14/Apr/2026 21:50:06] "GET / HTTP/1.1" 200 8253
+Not Found: /favicon.ico
+[14/Apr/2026 21:50:07] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 21:50:24] "GET /cisco/ HTTP/1.1" 200 8437
+Not Found: /favicon.ico
+[14/Apr/2026 21:50:25] "GET /favicon.ico HTTP/1.1" 404 7744
+D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\gestion_scolaire\views.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\utils\autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\core\management\commands\runserver.py", line 134, in inner_run
+    self.check(**check_kwargs)
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\core\management\base.py", line 496, in check
+    all_issues = checks.run_checks(
+                 ^^^^^^^^^^^^^^^^^^
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\core\checks\registry.py", line 89, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\core\checks\urls.py", line 16, in check_url_config
+    return check_resolver(resolver)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\core\checks\urls.py", line 26, in check_resolver
+    return check_method()
+           ^^^^^^^^^^^^^^
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\urls\resolvers.py", line 531, in check
+    for pattern in self.url_patterns:
+                   ^^^^^^^^^^^^^^^^^
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\urls\resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\mon_projet\urls.py", line 23, in <module>
+    path('utilisateurs/', views.manage_users, name='manage_users'),
+                          ^^^^^^^^^^^^^^^^^^
+AttributeError: module 'gestion_scolaire.views' has no attribute 'manage_users'
+D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\gestion_scolaire\views.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+April 14, 2026 - 22:16:44
+Django version 5.2.13, using settings 'mon_projet.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+
+WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\gestion_scolaire\views.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\utils\autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\core\management\commands\runserver.py", line 134, in inner_run
+    self.check(**check_kwargs)
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\core\management\base.py", line 496, in check
+    all_issues = checks.run_checks(
+                 ^^^^^^^^^^^^^^^^^^
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\core\checks\registry.py", line 89, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\core\checks\urls.py", line 16, in check_url_config
+    return check_resolver(resolver)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\core\checks\urls.py", line 26, in check_resolver
+    return check_method()
+           ^^^^^^^^^^^^^^
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\urls\resolvers.py", line 531, in check
+    for pattern in self.url_patterns:
+                   ^^^^^^^^^^^^^^^^^
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\urls\resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\env\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\mon_projet\urls.py", line 23, in <module>
+    path('utilisateurs/', views.manage_users, name='manage_users'),
+                          ^^^^^^^^^^^^^^^^^^
+AttributeError: module 'gestion_scolaire.views' has no attribute 'manage_users'
+D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT\gestion_scolaire\views.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+April 14, 2026 - 22:19:28
+Django version 5.2.13, using settings 'mon_projet.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+
+WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+[14/Apr/2026 22:22:24] "GET /cisco/ HTTP/1.1" 200 8437
+Not Found: /favicon.ico
+[14/Apr/2026 22:22:26] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:22:43] "GET /cisco/ HTTP/1.1" 200 8437
+Not Found: /favicon.ico
+[14/Apr/2026 22:22:45] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:22:59] "POST /logout/ HTTP/1.1" 302 0
+[14/Apr/2026 22:22:59] "GET /login/ HTTP/1.1" 200 1301
+Not Found: /favicon.ico
+[14/Apr/2026 22:22:59] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:23:30] "POST /login/ HTTP/1.1" 302 0
+[14/Apr/2026 22:23:31] "GET / HTTP/1.1" 200 9641
+Not Found: /favicon.ico
+[14/Apr/2026 22:23:32] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:23:54] "GET /utilisateurs/ HTTP/1.1" 200 15084
+Not Found: /favicon.ico
+[14/Apr/2026 22:23:56] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:24:03] "GET /utilisateurs/2/ HTTP/1.1" 200 15117
+Not Found: /favicon.ico
+[14/Apr/2026 22:24:06] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:24:37] "POST /utilisateurs/2/ HTTP/1.1" 302 0
+[14/Apr/2026 22:24:37] "GET /utilisateurs/ HTTP/1.1" 200 15451
+Not Found: /favicon.ico
+[14/Apr/2026 22:24:39] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:24:56] "POST /logout/ HTTP/1.1" 302 0
+[14/Apr/2026 22:24:56] "GET /login/ HTTP/1.1" 200 1301
+Not Found: /favicon.ico
+[14/Apr/2026 22:24:57] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:25:31] "POST /login/ HTTP/1.1" 302 0
+[14/Apr/2026 22:25:32] "GET / HTTP/1.1" 200 8253
+Not Found: /favicon.ico
+[14/Apr/2026 22:25:33] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:25:41] "GET /cisco/ HTTP/1.1" 200 7414
+Not Found: /favicon.ico
+[14/Apr/2026 22:25:43] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:26:01] "GET /etablissement/ HTTP/1.1" 200 8144
+Not Found: /favicon.ico
+[14/Apr/2026 22:26:03] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:26:25] "POST /logout/ HTTP/1.1" 302 0
+[14/Apr/2026 22:26:25] "GET /login/ HTTP/1.1" 200 1301
+Not Found: /favicon.ico
+[14/Apr/2026 22:26:25] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:26:52] "POST /login/ HTTP/1.1" 302 0
+[14/Apr/2026 22:26:53] "GET / HTTP/1.1" 200 9641
+Not Found: /favicon.ico
+[14/Apr/2026 22:26:54] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:27:05] "GET /utilisateurs/ HTTP/1.1" 200 15084
+Not Found: /favicon.ico
+[14/Apr/2026 22:27:07] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:27:13] "GET /utilisateurs/2/ HTTP/1.1" 200 15110
+Not Found: /favicon.ico
+[14/Apr/2026 22:27:15] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:27:34] "POST /utilisateurs/2/ HTTP/1.1" 302 0
+[14/Apr/2026 22:27:34] "GET /utilisateurs/ HTTP/1.1" 200 15444
+Not Found: /favicon.ico
+[14/Apr/2026 22:27:36] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:28:19] "POST /logout/ HTTP/1.1" 302 0
+[14/Apr/2026 22:28:19] "GET /login/ HTTP/1.1" 200 1301
+Not Found: /favicon.ico
+[14/Apr/2026 22:28:20] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:28:47] "POST /login/ HTTP/1.1" 302 0
+[14/Apr/2026 22:28:47] "GET / HTTP/1.1" 200 8246
+Not Found: /favicon.ico
+[14/Apr/2026 22:28:49] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:28:54] "GET /cisco/ HTTP/1.1" 200 8430
+Not Found: /favicon.ico
+[14/Apr/2026 22:28:57] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:29:05] "GET /cisco/8/ HTTP/1.1" 200 8453
+Not Found: /favicon.ico
+[14/Apr/2026 22:29:07] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:30:16] "GET /etablissement/ HTTP/1.1" 200 10220
+Not Found: /favicon.ico
+[14/Apr/2026 22:30:18] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:30:28] "POST /logout/ HTTP/1.1" 302 0
+[14/Apr/2026 22:30:28] "GET /login/ HTTP/1.1" 200 1301
+Not Found: /favicon.ico
+[14/Apr/2026 22:30:29] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:31:02] "POST /login/ HTTP/1.1" 200 1379
+Not Found: /favicon.ico
+[14/Apr/2026 22:31:03] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:31:29] "POST /login/ HTTP/1.1" 302 0
+[14/Apr/2026 22:31:30] "GET / HTTP/1.1" 200 9641
+Not Found: /favicon.ico
+[14/Apr/2026 22:31:31] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:31:40] "GET /utilisateurs/ HTTP/1.1" 200 15077
+Not Found: /favicon.ico
+[14/Apr/2026 22:31:42] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:33:20] "GET /api/autocomplete/?type=dren&term=bo&parent_id= HTTP/1.1" 200 91
+[14/Apr/2026 22:33:24] "GET /api/autocomplete/?type=cisco&term=ma&parent_id=14 HTTP/1.1" 200 2
+[14/Apr/2026 22:33:25] "GET /api/autocomplete/?type=cisco&term=mah&parent_id=14 HTTP/1.1" 200 2
+[14/Apr/2026 22:33:25] "GET /api/autocomplete/?type=cisco&term=maha&parent_id=14 HTTP/1.1" 200 33
+[14/Apr/2026 22:33:38] "POST /utilisateurs/ HTTP/1.1" 302 0
+[14/Apr/2026 22:33:38] "GET /utilisateurs/ HTTP/1.1" 200 16237
+Not Found: /favicon.ico
+[14/Apr/2026 22:33:39] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:34:05] "GET /utilisateurs/3/ HTTP/1.1" 200 15904
+Not Found: /favicon.ico
+[14/Apr/2026 22:34:07] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:34:35] "POST /utilisateurs/3/ HTTP/1.1" 302 0
+[14/Apr/2026 22:34:35] "GET /utilisateurs/ HTTP/1.1" 200 16231
+Not Found: /favicon.ico
+[14/Apr/2026 22:34:36] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:35:34] "GET /utilisateurs/3/ HTTP/1.1" 200 15912
+Not Found: /favicon.ico
+[14/Apr/2026 22:35:36] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:35:52] "POST /utilisateurs/3/ HTTP/1.1" 302 0
+[14/Apr/2026 22:35:52] "GET /utilisateurs/ HTTP/1.1" 200 16237
+Not Found: /favicon.ico
+[14/Apr/2026 22:35:53] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:35:58] "POST /logout/ HTTP/1.1" 302 0
+[14/Apr/2026 22:35:58] "GET /login/ HTTP/1.1" 200 1301
+Not Found: /favicon.ico
+[14/Apr/2026 22:35:59] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:36:24] "POST /login/ HTTP/1.1" 302 0
+[14/Apr/2026 22:36:24] "GET / HTTP/1.1" 200 8257
+Not Found: /favicon.ico
+[14/Apr/2026 22:36:26] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:36:31] "GET /etablissement/ HTTP/1.1" 200 8148
+Not Found: /favicon.ico
+[14/Apr/2026 22:36:33] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:36:42] "GET /dren/ HTTP/1.1" 200 6291
+Not Found: /favicon.ico
+[14/Apr/2026 22:36:43] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:36:45] "GET /portfolio/ HTTP/1.1" 200 6618
+Not Found: /favicon.ico
+[14/Apr/2026 22:36:47] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:37:46] "GET /presence/ HTTP/1.1" 200 7494
+Not Found: /favicon.ico
+[14/Apr/2026 22:37:47] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:37:54] "POST /logout/ HTTP/1.1" 302 0
+[14/Apr/2026 22:37:54] "GET /login/ HTTP/1.1" 200 1301
+Not Found: /favicon.ico
+[14/Apr/2026 22:37:54] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:38:32] "POST /login/ HTTP/1.1" 302 0
+[14/Apr/2026 22:38:32] "GET / HTTP/1.1" 200 8246
+Not Found: /favicon.ico
+[14/Apr/2026 22:38:34] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:39:02] "GET /presence/ HTTP/1.1" 200 8984
+Not Found: /favicon.ico
+[14/Apr/2026 22:39:03] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:39:41] "GET /presence/12/ HTTP/1.1" 200 8979
+Not Found: /favicon.ico
+[14/Apr/2026 22:39:43] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:40:09] "GET /etablissement/ HTTP/1.1" 200 10220
+Not Found: /favicon.ico
+[14/Apr/2026 22:40:10] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:40:26] "GET /presence/ HTTP/1.1" 200 8984
+Not Found: /favicon.ico
+[14/Apr/2026 22:40:28] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:41:30] "POST /logout/ HTTP/1.1" 302 0
+[14/Apr/2026 22:41:30] "GET /login/ HTTP/1.1" 200 1301
+Not Found: /favicon.ico
+[14/Apr/2026 22:41:30] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:41:55] "POST /login/ HTTP/1.1" 302 0
+[14/Apr/2026 22:41:56] "GET / HTTP/1.1" 200 8257
+Not Found: /favicon.ico
+[14/Apr/2026 22:41:57] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:42:03] "GET /presence/ HTTP/1.1" 200 7494
+Not Found: /favicon.ico
+[14/Apr/2026 22:42:04] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:42:11] "GET /etablissement/ HTTP/1.1" 200 8148
+Not Found: /favicon.ico
+[14/Apr/2026 22:42:13] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:42:23] "POST /logout/ HTTP/1.1" 302 0
+[14/Apr/2026 22:42:23] "GET /login/ HTTP/1.1" 200 1301
+Not Found: /favicon.ico
+[14/Apr/2026 22:42:23] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:43:04] "POST /login/ HTTP/1.1" 302 0
+[14/Apr/2026 22:43:04] "GET / HTTP/1.1" 200 9641
+Not Found: /favicon.ico
+[14/Apr/2026 22:43:06] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:43:10] "GET /etablissement/ HTTP/1.1" 200 18626
+Not Found: /favicon.ico
+[14/Apr/2026 22:43:11] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:43:21] "GET /etablissement/2/ HTTP/1.1" 200 18639
+Not Found: /favicon.ico
+[14/Apr/2026 22:43:24] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:43:33] "GET /cisco/ HTTP/1.1" 200 16792
+Not Found: /favicon.ico
+[14/Apr/2026 22:43:35] "GET /favicon.ico HTTP/1.1" 404 7744
+[14/Apr/2026 22:45:12] "GET /api/autocomplete/?type=dren&term=bo HTTP/1.1" 200 91
+[14/Apr/2026 22:45:20] "POST /cisco/ HTTP/1.1" 302 0
+[14/Apr/2026 22:45:20] "GET /cisco/ HTTP/1.1" 200 17606
+Not Found: /favicon.ico
+[14/Apr/2026 22:45:22] "GET /favicon.ico HTTP/1.1" 404 7744
+(env) PS D:\PYTHON DJANGO HOPES\github25\Projet_PORTFOLIO_ETABLISSEMENT>                           
