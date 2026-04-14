@@ -23,11 +23,16 @@ def has_perm(user, action):
     return False
 
 def filter_queryset_by_user(queryset, user, entity_type):
-    """ Filtre les requêtes de la Base de Données selon la restriction de l'utilisateur """
+    """ Filtre IMPITOYABLEMENT les requêtes selon la restriction de l'utilisateur """
     if user.is_superuser or not hasattr(user, 'profile'): return queryset
     p = user.profile
     d_id, c_id, z_id, f_id, e_id = p.dren_assignee_id, p.cisco_assignee_id, p.zap_assignee_id, p.fokontany_assignee_id, p.etablissement_assignee_id
     
+    # 1. S'il n'y a absolument aucune restriction, c'est un Accès National
+    if not any([d_id, c_id, z_id, f_id, e_id]):
+        return queryset
+
+    # 2. S'il y a une restriction, on filtre scrupuleusement
     if entity_type == 'dren':
         if e_id: return queryset.filter(id=p.etablissement_assignee.fokontany.zap.cisco.dren_id)
         if f_id: return queryset.filter(id=p.fokontany_assignee.zap.cisco.dren_id)
@@ -70,7 +75,15 @@ def filter_queryset_by_user(queryset, user, entity_type):
         if c_id: return queryset.filter(etablissement__fokontany__zap__cisco_id=c_id)
         if d_id: return queryset.filter(etablissement__fokontany__zap__cisco__dren_id=d_id)
         
-    return queryset
+    elif entity_type == 'portfolio':
+        if e_id: return queryset.filter(presences__etablissement_id=e_id).distinct()
+        if f_id: return queryset.filter(presences__etablissement__fokontany_id=f_id).distinct()
+        if z_id: return queryset.filter(presences__etablissement__fokontany__zap_id=z_id).distinct()
+        if c_id: return queryset.filter(presences__etablissement__fokontany__zap__cisco_id=c_id).distinct()
+        if d_id: return queryset.filter(presences__etablissement__fokontany__zap__cisco__dren_id=d_id).distinct()
+        
+    # 3. FAIL-SAFE SÉCURITÉ ABSOLUE : Si l'utilisateur est limité mais qu'aucune règle n'a fonctionné, on bloque tout l'affichage !
+    return queryset.none()
 
 @login_required
 def manage_users(request, id=None):
@@ -82,6 +95,14 @@ def manage_users(request, id=None):
         username, password, role = clean_text(request.POST.get('username')), request.POST.get('password'), request.POST.get('role', 'INVITE')
         is_superuser, can_add, can_edit, can_delete = request.POST.get('is_superuser') == 'on', request.POST.get('can_add') == 'on', request.POST.get('can_edit') == 'on', request.POST.get('can_delete') == 'on'
         
+        # --- VÉRIFICATION ANTI-FAUX AMIS ---
+        d_text, d_id = request.POST.get('dren_text'), request.POST.get('dren_assignee')
+        c_text, c_id = request.POST.get('cisco_text'), request.POST.get('cisco_assignee')
+        if (d_text and not d_id) or (c_text and not c_id):
+            messages.error(request, "Erreur de Sécurité : Vous avez tapé le nom d'une zone mais vous n'avez pas cliqué sur la suggestion de la liste. L'employé aurait eu un accès non sécurisé !")
+            return redirect('manage_users')
+        # -----------------------------------
+
         if username:
             if User.objects.filter(username__iexact=username).exclude(id=instance.id if instance else None).exists():
                 messages.error(request, f"Le login '{username}' existe déjà.")
@@ -97,13 +118,13 @@ def manage_users(request, id=None):
                 
                 profile = user_to_update.profile
                 profile.role, profile.can_add, profile.can_edit, profile.can_delete = role, (can_add if not is_superuser else True), (can_edit if not is_superuser else True), (can_delete if not is_superuser else True)
-                profile.dren_assignee_id = request.POST.get('dren_assignee') or None
-                profile.cisco_assignee_id = request.POST.get('cisco_assignee') or None
+                profile.dren_assignee_id = d_id or None
+                profile.cisco_assignee_id = c_id or None
                 profile.zap_assignee_id = request.POST.get('zap_assignee') or None
                 profile.fokontany_assignee_id = request.POST.get('fokontany_assignee') or None
                 profile.etablissement_assignee_id = request.POST.get('etablissement_assignee') or None
                 profile.save()
-                messages.success(request, "Utilisateur et permissions enregistrés."); return redirect('manage_users')
+                messages.success(request, "Utilisateur et permissions enregistrés avec succès."); return redirect('manage_users')
                 
     return render(request, 'manage_users.html', {'utilisateurs': User.objects.all().select_related('profile').order_by('-id'), 'edit_obj': instance})
 
@@ -290,7 +311,10 @@ def manage_portfolio(request, id=None):
                 if instance: instance.cin, instance.nom_prenom, instance.lien = cin, nom_prenom, lien; instance.save()
                 else: LienPortfolio.objects.create(cin=cin, nom_prenom=nom_prenom, lien=lien)
                 messages.success(request, "Enregistrement réussi."); return redirect('manage_portfolio')
-    return render(request, 'manage_portfolio.html', {'portfolios': LienPortfolio.objects.order_by('-id'), 'edit_obj': instance})
+    
+    # LA FAILLE ÉTAIT ICI : Les portfolios n'étaient pas filtrés !
+    portfolios = filter_queryset_by_user(LienPortfolio.objects.all(), request.user, 'portfolio').order_by('-id')
+    return render(request, 'manage_portfolio.html', {'portfolios': portfolios, 'edit_obj': instance})
 
 @login_required
 def delete_portfolio(request, id):
@@ -301,7 +325,7 @@ def delete_portfolio(request, id):
 @login_required
 def manage_presence(request, id=None):
     instance = get_object_or_404(Presence, id=id) if id else None
-    personnes = LienPortfolio.objects.all().order_by('nom_prenom')
+    personnes = filter_queryset_by_user(LienPortfolio.objects.all(), request.user, 'portfolio').order_by('nom_prenom')
     if request.method == 'POST':
         if not has_perm(request.user, 'edit' if instance else 'add'): messages.error(request, "Accès refusé."); return redirect('manage_presence')
         p_id, e_id, d_deb, d_fin = request.POST.get('personne_id'), request.POST.get('etablissement_id'), request.POST.get('date_debut'), request.POST.get('date_fin') or None

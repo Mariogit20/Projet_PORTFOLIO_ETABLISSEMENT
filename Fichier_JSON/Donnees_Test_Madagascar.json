@@ -78,7 +78,7 @@
     { "model": "gestion_scolaire.etablissement", "pk": 14, "fields": { "nom": "CEG PK3", "fokontany": 9 } },
     { "model": "gestion_scolaire.etablissement", "pk": 15, "fields": { "nom": "Lycée Mixte Sambava", "fokontany": 10 } },
 
-    { "model": "gestion_scolaire.lienportfolio", "pk": 1, "fields": { "cin": "101011012013", "nom_prenom": "Mario Rakoto", "lien": "https://mariogit20.github.io/portfolio/" } },
+    { "model": "gestion_scolaire.lienportfolio", "pk": 1, "fields": { "cin": "101011012013", "nom_prenom": "Mario Rakoto", "lien": "https://mariogit20.github.io/cv_Mario_HTML2/" } },
     { "model": "gestion_scolaire.lienportfolio", "pk": 2, "fields": { "cin": "101099088077", "nom_prenom": "Jean Michel", "lien": "https://jean-michel.mg/cv/" } },
     { "model": "gestion_scolaire.lienportfolio", "pk": 3, "fields": { "cin": "201055044033", "nom_prenom": "Andria Lova", "lien": "https://andria-lova.dev/" } },
     { "model": "gestion_scolaire.lienportfolio", "pk": 4, "fields": { "cin": "301044055066", "nom_prenom": "Razafy Marie", "lien": "https://razafy-m.mg/" } },

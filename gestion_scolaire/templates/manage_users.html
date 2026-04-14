@@ -26,23 +26,23 @@
                 <label class="form-label fw-bold text-primary">🌍 Limitation Géographique :</label>
                 
                 <label class="mt-2 fw-bold small">DREN :</label>
-                <input type="text" id="dren-input" class="form-control form-control-sm autocomplete" data-type="dren" value="{% if edit_obj and edit_obj.profile.dren_assignee %}{{ edit_obj.profile.dren_assignee.nom }}{% endif %}" autocomplete="off">
+                <input type="text" id="dren-input" name="dren_text" class="form-control form-control-sm autocomplete" data-type="dren" value="{% if edit_obj and edit_obj.profile.dren_assignee %}{{ edit_obj.profile.dren_assignee.nom }}{% endif %}" autocomplete="off">
                 <input type="hidden" id="dren-id" name="dren_assignee" value="{% if edit_obj and edit_obj.profile.dren_assignee %}{{ edit_obj.profile.dren_assignee.id }}{% endif %}"><div id="dren-suggestions" class="suggestions-box"></div>
 
                 <label class="mt-2 fw-bold small">CISCO :</label>
-                <input type="text" id="cisco-input" class="form-control form-control-sm autocomplete" data-type="cisco" data-parent="dren" value="{% if edit_obj and edit_obj.profile.cisco_assignee %}{{ edit_obj.profile.cisco_assignee.nom }}{% endif %}" autocomplete="off" {% if not edit_obj or not edit_obj.profile.dren_assignee %}disabled{% endif %}>
+                <input type="text" id="cisco-input" name="cisco_text" class="form-control form-control-sm autocomplete" data-type="cisco" data-parent="dren" value="{% if edit_obj and edit_obj.profile.cisco_assignee %}{{ edit_obj.profile.cisco_assignee.nom }}{% endif %}" autocomplete="off" {% if not edit_obj or not edit_obj.profile.dren_assignee %}disabled{% endif %}>
                 <input type="hidden" id="cisco-id" name="cisco_assignee" value="{% if edit_obj and edit_obj.profile.cisco_assignee %}{{ edit_obj.profile.cisco_assignee.id }}{% endif %}"><div id="cisco-suggestions" class="suggestions-box"></div>
                 
                 <label class="mt-2 fw-bold small">ZAP :</label>
-                <input type="text" id="zap-input" class="form-control form-control-sm autocomplete" data-type="zap" data-parent="cisco" value="{% if edit_obj and edit_obj.profile.zap_assignee %}{{ edit_obj.profile.zap_assignee.nom }}{% endif %}" autocomplete="off" {% if not edit_obj or not edit_obj.profile.cisco_assignee %}disabled{% endif %}>
+                <input type="text" id="zap-input" name="zap_text" class="form-control form-control-sm autocomplete" data-type="zap" data-parent="cisco" value="{% if edit_obj and edit_obj.profile.zap_assignee %}{{ edit_obj.profile.zap_assignee.nom }}{% endif %}" autocomplete="off" {% if not edit_obj or not edit_obj.profile.cisco_assignee %}disabled{% endif %}>
                 <input type="hidden" id="zap-id" name="zap_assignee" value="{% if edit_obj and edit_obj.profile.zap_assignee %}{{ edit_obj.profile.zap_assignee.id }}{% endif %}"><div id="zap-suggestions" class="suggestions-box"></div>
                 
                 <label class="mt-2 fw-bold small">Fokontany :</label>
-                <input type="text" id="fokontany-input" class="form-control form-control-sm autocomplete" data-type="fokontany" data-parent="zap" value="{% if edit_obj and edit_obj.profile.fokontany_assignee %}{{ edit_obj.profile.fokontany_assignee.nom }}{% endif %}" autocomplete="off" {% if not edit_obj or not edit_obj.profile.zap_assignee %}disabled{% endif %}>
+                <input type="text" id="fokontany-input" name="fokontany_text" class="form-control form-control-sm autocomplete" data-type="fokontany" data-parent="zap" value="{% if edit_obj and edit_obj.profile.fokontany_assignee %}{{ edit_obj.profile.fokontany_assignee.nom }}{% endif %}" autocomplete="off" {% if not edit_obj or not edit_obj.profile.zap_assignee %}disabled{% endif %}>
                 <input type="hidden" id="fokontany-id" name="fokontany_assignee" value="{% if edit_obj and edit_obj.profile.fokontany_assignee %}{{ edit_obj.profile.fokontany_assignee.id }}{% endif %}"><div id="fokontany-suggestions" class="suggestions-box"></div>
                 
                 <label class="mt-2 fw-bold small">Établissement :</label>
-                <input type="text" id="etablissement-input" class="form-control form-control-sm autocomplete" data-type="etablissement" data-parent="fokontany" value="{% if edit_obj and edit_obj.profile.etablissement_assignee %}{{ edit_obj.profile.etablissement_assignee.nom }}{% endif %}" autocomplete="off" {% if not edit_obj or not edit_obj.profile.fokontany_assignee %}disabled{% endif %}>
+                <input type="text" id="etablissement-input" name="etablissement_text" class="form-control form-control-sm autocomplete" data-type="etablissement" data-parent="fokontany" value="{% if edit_obj and edit_obj.profile.etablissement_assignee %}{{ edit_obj.profile.etablissement_assignee.nom }}{% endif %}" autocomplete="off" {% if not edit_obj or not edit_obj.profile.fokontany_assignee %}disabled{% endif %}>
                 <input type="hidden" id="etablissement-id" name="etablissement_assignee" value="{% if edit_obj and edit_obj.profile.etablissement_assignee %}{{ edit_obj.profile.etablissement_assignee.id }}{% endif %}"><div id="etablissement-suggestions" class="suggestions-box"></div>
 
                 <small class="text-muted d-block mt-2" style="font-size:0.8rem;">Laissez vide pour Accès National. Renseignez la zone la plus précise pour y restreindre l'employé.</small>
