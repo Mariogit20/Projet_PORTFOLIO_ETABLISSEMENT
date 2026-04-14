@@ -1,0 +1,56 @@
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github25/Projet_PORTFOLIO_ETABLISSEMENT (main)
+$ git add .
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github25/Projet_PORTFOLIO_ETABLISSEMENT (main)
+$ git commit -m "autre sauvegarde 4"
+[main a53cc4d] autre sauvegarde 4
+ 11 files changed, 37 insertions(+), 623 deletions(-)
+ create mode 100644 db_OLD.sqlite3
+ delete mode 100644 gestion_scolaire/admin_OLD4.py
+ delete mode 100644 gestion_scolaire/models_OLD4.py
+ delete mode 100644 gestion_scolaire/urls_OLD4.py
+ delete mode 100644 gestion_scolaire/views_OLD4.py
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github25/Projet_PORTFOLIO_ETABLISSEMENT (main)
+$ git push origin main
+Enumerating objects: 23, done.
+Counting objects: 100% (23/23), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (12/12), done.
+Writing objects: 100% (12/12), 6.38 KiB | 593.00 KiB/s, done.
+Total 12 (delta 10), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (10/10), completed with 10 local objects.
+To github.com:Mariogit20/Projet_PORTFOLIO_ETABLISSEMENT.git
+   6ce1f93..a53cc4d  main -> main
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github25/Projet_PORTFOLIO_ETABLISSEMENT (main)
+$ git add .
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github25/Projet_PORTFOLIO_ETABLISSEMENT (main)
+$ git commit -m "autre sauvegarde 5"
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github25/Projet_PORTFOLIO_ETABLISSEMENT (main)
+$ git push origin main
+Everything up-to-date
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github25/Projet_PORTFOLIO_ETABLISSEMENT (main)
+$ git add .
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github25/Projet_PORTFOLIO_ETABLISSEMENT (main)
+$ git commit -m "autre sauvegarde 7"
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github25/Projet_PORTFOLIO_ETABLISSEMENT (main)
+$ git push origin main
+Everything up-to-date
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github25/Projet_PORTFOLIO_ETABLISSEMENT (main)
+$
